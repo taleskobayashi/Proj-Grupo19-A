@@ -1,0 +1,45 @@
+Com as devidas bibliotecas instaladas e com um device CUDA para a versao CUDA paralela, os comandos de compilação e execução são os seguintes:
+
+
+PARA O SEQUENCIAL:
+
+COMPILAÇÃO:
+g++ -ggdb `pkg-config --cflags opencv` mainSequencial.cpp -o seq.o `pkg-config --libs opencv`
+
+EXECUÇÃO:
+
+./seq.o n
+
+(onde 'n' é o numero do conjunto de vizinhos a ser considerado pelo algoritmo smooth, execute com n = 5 para testes,que será considerado o conjunto de 5x5 pixels)
+
+
+
+
+
+PARA O PARALELO:
+
+COMPILAÇÃO:
+g++ -fopenmp -ggdb `pkg-config --cflags opencv` mainParalelo.cpp -o pal.o `pkg-config --libs opencv`
+
+EXECUÇÃO:
+
+./pal.o n
+
+(onde 'n' é o numero do conjunto de vizinhos a ser considerado pelo algoritmo smooth, execute com n = 5 para testes,que será considerado o conjunto de 5x5 pixels)
+
+
+
+
+
+
+
+PARA A VERSÃO CUDA:
+
+COMPILAÇÃO:
+nvcc `pkg-config --cflags opencv` mainCUDA.cu -o cuda.o `pkg-config --libs opencv`
+
+EXECUÇÃO:
+
+./cuda.o
+
+(na versão cuda o n já fica setado por 5 sem necessidade de por argumento)
