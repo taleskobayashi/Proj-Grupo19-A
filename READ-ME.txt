@@ -1,0 +1,47 @@
+Com as devidas bibliotecas instaladas e com um device CUDA para a versao CUDA paralela, os comandos de compilação e execução são os seguintes:
+
+OBS: A execução dos códigos Sequencial e Paralelo em maquina local funcionam corretamente. No Cluster elas compilam utilizando 'nvcc' no lugar de 'g++' mas na hora da execução o valor size de pixel não é gerado.
+
+
+PARA O SEQUENCIAL:
+
+COMPILAÇÃO:
+g++ -ggdb `pkg-config --cflags opencv` versaoSeq.cpp -o seq `pkg-config --libs opencv`
+
+EXECUÇÃO:
+
+./seq.o n
+
+(onde 'n' é o numero do conjunto de vizinhos a ser considerado pelo algoritmo smooth, execute com n = 5 para testes,que será considerado o conjunto de 5x5 pixels)
+
+
+
+
+
+PARA O PARALELO:
+
+COMPILAÇÃO:
+g++ -fopenmp -ggdb `pkg-config --cflags opencv` versaoParalelo.cpp -o pal `pkg-config --libs opencv`
+
+EXECUÇÃO:
+
+./pal.o n
+
+(onde 'n' é o numero do conjunto de vizinhos a ser considerado pelo algoritmo smooth, execute com n = 5 para testes,que será considerado o conjunto de 5x5 pixels)
+
+
+
+
+
+
+
+PARA A VERSÃO CUDA:
+
+COMPILAÇÃO:
+nvcc `pkg-config --cflags opencv` versaoCUDA.cu -o cuda.o `pkg-config --libs opencv`
+
+EXECUÇÃO:
+
+./cuda.o
+
+(na versão cuda o n já fica setado por 5 sem necessidade de por argumento)
